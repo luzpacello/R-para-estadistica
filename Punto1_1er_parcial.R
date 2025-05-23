@@ -41,7 +41,6 @@ moda(datos)
 
 # Percentiles, deciles y cuartiles
 #como los datos ya estan ordenados no es necesario usar sort
-#anterior mente tenemos que haber calculado la mediana
 
 #   ------ PERCENTILES ------
 #Funcion
@@ -64,19 +63,54 @@ quantile(datos, probs = seq(0, 1, 0.1))
 print("cuartiles")
 quantile(datos, probs = seq(0, 1, 0.25))
 
-#   ------  ------
+#   ------ Medidas de dispersión ------
+
+#   ------ Medidas de dispersión para media ------
 varianza <- round(var(datos), 4)
 desviacion <- round(sd(datos), 4)
-cv <- (media / desviacion) * 100
+
 cat("varianza:", varianza, "\n")
 cat("desviacion estandar:", round(desviacion,4), "\n")
-cat("coeficiente de variacion:", cv, "\n")
 
+#   ------ Medidas de dispersión para la mediana ------
+MAD <- round(mad(datos, constant = 1),4)
+
+#   ------ REGLA EMPIRICA ------
+#La regla empírica sirve para tener una idea de la simetría del conjunto de datos con
+#el cual se está trabajando.
+#Para corroborar si el comportamiento de la variable es simétrico se debe verificar que:
 cat("Regla empírica para los datos:\n")
 cat("68% de los datos están entre:", round(media - desviacion, 2), "y", round(media + desviacion, 2), "\n")
 cat("95% de los datos están entre:", round(media - 2*desviacion, 2), "y", round(media + 2*desviacion, 2), "\n")
 cat("99.7% de los datos están entre:", round(media - 3*desviacion, 2), "y", round(media + 3*desviacion, 2), "\n")
+#¿Cuando usar media o mediana como medida de dispersion?#
+#Si se verifica la regla empírica entoences el comportamiento de la variable es
+#simétrico y puedes utilizar como medida de posición central la media y el desvío
+#estándar.
 
+#Otra forma más extensa para usar la REGLA EMPIRICA
+# Intervalos según la regla
+intervalo_1 <- c(media - desvio, media + desvio)
+intervalo_2 <- c(media - 2*desvio, media + 2*desvio)
+intervalo_3 <- c(media - 3*desvio, media + 3*desvio)
+
+# Porcentaje de datos en cada intervalo
+porc_1 <- mean(datos >= intervalo_1[1] & datos <= intervalo_1[2]) * 100
+porc_2 <- mean(datos >= intervalo_2[1] & datos <= intervalo_2[2]) * 100
+porc_3 <- mean(datos >= intervalo_3[1] & datos <= intervalo_3[2]) * 100
+
+#El primero debe ser arriba del 68%
+cat("Porcentaje en ±1s:", round(porc_1, 1), "%\n") 
+#El el segundo debe ser arriba del 95%
+cat("Porcentaje en ±2s:", round(porc_2, 1), "%\n")
+#El tercero debe ser arriba del 99.7%
+cat("Porcentaje en ±3s:", round(porc_3, 1), "%\n")
+
+#Si se acercan ligeramente los datos a la normalidad pasamos a calcular la simetria para
+#terminar de verificar que medida usar
+
+#   ------ Medidas de Asimetria ------
+#Asimetria en gallego 
 interpretar_sesgo <- function(datos){
     a <- skewness(datos)
     cat("Coeficiente de asimetría:", round(a, 3), "\n")
@@ -89,8 +123,27 @@ interpretar_sesgo <- function(datos){
     }
 }
 interpretar_sesgo(datos)
-curtosis <- round(kurtosis(datos),4)
-MAD <- round(mad(datos, constant = 1),4)
+#en el caso de los datos dados, como es minimo el sesgo a la izq, es bastante simetrica,
+#por lo que se puede usar la media como medida de tendencia central
+
+
+#   ------ Medidas de Curtosis ------
+#Es el grado de apuntamiento o curtosis de una distribución
+curtosis <- round(kurtosis(datos) - 3 ,4)
+#Leptocúrtica: Más apuntada y con colas más anchas que la simétrica.  curtosis > 0
+#Platicúrtica: Menos apuntada y con colas menos anchas que la simétrica. curtosis < 0
+#Mesocúrtica: Es la distribución simétrica respecto de su media. curtosis = 0
+
+
+cv <- (media / desviacion) * 100
+cat("coeficiente de variacion:", cv, "\n")
+#En caso de que la media sea muy próxima a cero no debe usarse ya que el denominador
+#es muy pequeño y puede dar un grado erróneo de la dispersión.
+#Cuanto menor sea el coeficiente de variación menor será la dispersión en el comportamiento
+#del conjunto de datos, y de esa manera, la media será más representativa.
+
+
+
 
 #Diagrama de tallo y hoja
 steam(datos)
