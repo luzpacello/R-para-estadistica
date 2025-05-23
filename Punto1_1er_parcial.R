@@ -1,0 +1,152 @@
+#Primero definimos el directorio en el que etamos trabajando
+#Nota: Si trabajas con R estudio, le das click derecho al nombre del archivo
+#     le das a "Set Working Directory" para setear el directorio en el cual
+#     estas trabajando
+#Obtenemos el directorio en el que estamos trabajando
+getwd()
+#Si el directorio es igual que donde esta guardado el archivo, podes continuar
+#En caso contrario,mira README.md del repositorio https://github.com/luzpacello/R-para-estadistica.git
+
+# Función para borrar todos los elementos
+rm(list=ls())
+
+# Libreria para calcular la asimetria y curtosis
+options(scipen = 999)
+library(moments)
+
+# Lista de datos
+datos<-c(6.3, 6.4, 7.7, 8.4, 8.5, 8.8, 8.9, 9.0,
+         9.1,10,10.1,10.2,10.6,10.6,10.7,10.7,10.8,
+         10.9,11.1,11.2,11.2,11.4,11.9,11.9,12.2,13.1)
+
+#
+n <- length(datos)
+cat("tamaño de muestra:", n, "\n")
+
+suma <- sum(datos)
+cat("suma:", suma, "\n")
+#Medidas de posicion central
+media <- round(mean(datos), 4)
+cat("media:", media, "\n")
+mediana <- round(median(datos),4)
+cat("mediana:", mediana, "\n")
+
+moda <- function(x) {
+    ux = unique(x)
+    tab = tabulate(match(x, ux))
+    ux[tab == max(tab)]
+}
+print("moda")
+moda(datos)
+
+# Percentiles, deciles y cuartiles
+#como los datos ya estan ordenados no es necesario usar sort
+#anterior mente tenemos que haber calculado la mediana
+
+#   ------ PERCENTILES ------
+#Funcion
+#percentil 50
+print("percentil 50")
+quantile(datos, probs = 0.50)
+#todos los percentilres
+#seq es para crear secuencias de datos
+print("percentiles")
+quantile(datos, probs = seq(0, 1, 0.01))
+#   ------ DECILES ------
+#decil 50}
+print("decil 50")
+quantile(datos, probs = 0.50)
+#todos los deciles
+print("deciles") 
+quantile(datos, probs = seq(0, 1, 0.1))
+#   ------ CUARTILES ------
+#todos los cuartiles
+print("cuartiles")
+quantile(datos, probs = seq(0, 1, 0.25))
+
+#   ------  ------
+varianza <- round(var(datos), 4)
+desviacion <- round(sd(datos), 4)
+cv <- (media / desviacion) * 100
+cat("varianza:", varianza, "\n")
+cat("desviacion estandar:", round(desviacion,4), "\n")
+cat("coeficiente de variacion:", cv, "\n")
+
+cat("Regla empírica para los datos:\n")
+cat("68% de los datos están entre:", round(media - desviacion, 2), "y", round(media + desviacion, 2), "\n")
+cat("95% de los datos están entre:", round(media - 2*desviacion, 2), "y", round(media + 2*desviacion, 2), "\n")
+cat("99.7% de los datos están entre:", round(media - 3*desviacion, 2), "y", round(media + 3*desviacion, 2), "\n")
+
+interpretar_sesgo <- function(datos){
+    a <- skewness(datos)
+    cat("Coeficiente de asimetría:", round(a, 3), "\n")
+    if (a > 0.5) {
+        cat("→ Distribución asimétrica positiva (sesgo a la derecha)\n")
+    } else if (a < -0.5) {
+        cat("→ Distribución asimétrica negativa (sesgo a la izquierda)\n")
+    } else {
+        cat("→ Distribución aproximadamente simétrica\n")
+    }
+}
+interpretar_sesgo(datos)
+curtosis <- round(kurtosis(datos),4)
+MAD <- round(mad(datos, constant = 1),4)
+
+#Diagrama de tallo y hoja
+steam(datos)
+
+#Histograma
+#tambien breaks podria ser breaks <- seq(6.3, 13.5, by = 1.2) siendo 1.2 elRango intercuartílico alias RI 
+breaks <- c(6.3, 7.5, 8.7, 9.9, 11.1, 12.3, 13.5)
+hist(datos, breaks = breaks, col = "skyblue", main = "Histograma de Rentabilidad", xlab = "% Rentabilidad")
+
+#Datos del Boxplot
+rango <- range(datos)
+minimo <- min(datos)
+maximo <- max(datos)
+Q1 <- quantile(datos, 0.25, type = 2)
+Q3 <- quantile(datos, 0.75, type = 2)
+RI <- Q1 - Q3
+
+bigote_izq <- Q1 - (1.5 * RI)
+bigote_der <- Q3 + (1.5 * RI)
+
+print("Rango")
+rango
+cat("min:", minimo, "\n")
+cat("max:", maximo, "\n")
+cat("Q1:", Q1, "\n")
+cat("Q3:", Q3, "\n")
+print("bigotes izq y der")
+bigote_izq
+bigote_der
+
+boxplot(datos, horizontal = TRUE, main = "Boxplot de Rentabilidad", col = "lightgreen")
+
+#Tabla de frecuencias
+# Clasificación en intervalos definidos
+intervalos <- cut(datos, breaks = breaks, right = FALSE, include.lowest = TRUE)
+
+# Calculo de Frecuencias
+frec_abs <- table(intervalos)
+
+lim_inf <- breaks[-length(breaks)]
+lim_sup <- breaks[-1]
+marcas_clase <- (lim_inf + lim_sup) / 2
+
+frec_rel <- prop.table(frec_abs)
+frec_porc <- round(frec_rel * 100, 2)
+frec_abs_acum <- cumsum(frec_abs)
+frec_rel_acum <- cumsum(frec_rel)
+
+# Crear la tabla
+tabla_frecuencias <- data.frame(
+    Intervalo = names(frec_abs),
+    Marca_de_clase = marcas_clase,
+    Frecuencia = as.numeric(frec_abs),
+    Frec_relativa = round(as.numeric(frec_rel), 3),
+    Frec_porcentual = frec_porc,
+    Frec_acumulada = as.numeric(frec_abs_acum)
+)
+# Mostrar tabla
+print(tabla_frecuencias, row.names = FALSE)
