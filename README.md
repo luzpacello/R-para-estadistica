@@ -18,7 +18,7 @@ setwd(choose.dir())   # Solo funciona si R tiene acceso a GUI (RGui o RStudio en
 - Desde RStudio
 Session > Set Working Directory > Choose Directory...
 
--Usando Paquetes 
+- Usando Paquetes 
 install.packages("here")
 library(here)
 
