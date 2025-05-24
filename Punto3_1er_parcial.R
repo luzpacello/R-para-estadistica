@@ -1,4 +1,5 @@
-# Con reemplazo (o independientes) y se distingue con la probabilidad de obtener x éxitos en n ensayos	
+# Con reemplazo (o independientes) y tiene un numero de ensayos fijo
+# La probabilidad de obtener x éxitos en n ensayos	
 # Ej: Lanzar una moneda 10 veces
 # n = número de ensayos
 # p = probabilidad de éxito en cada ensayo
