@@ -1,3 +1,6 @@
+# Sin reemplazo	y con numero fijo de ensayos
+# La probabilidad de x éxitos al tomar n elementos de una población	
+# Ej: Sacar cartas sin reponer
 # N: tamaño total de la población
 # K: número total de éxitos en la población
 # n: tamaño de la muestra
