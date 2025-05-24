@@ -24,3 +24,5 @@ library(here)
 
 (Te da la raíz del proyecto (muy útil en scripts))
 here::here("datos", "archivo.csv")
+
+NOTA 2: Si estas usando RStudio proba y descarga todas las librerias que uses antes del parcial
