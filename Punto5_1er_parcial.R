@@ -6,10 +6,10 @@
 # n: tamaño de la muestra
 # x: número de éxitos deseados en la muestra
 
-N <- 100         #es ejemplo hay que cambiarlo antes de iniciar
-K <- 0.5         #es ejemplo hay que cambiarlo antes de iniciar
-n <- 10          #es ejemplo hay que cambiarlo antes de iniciar
-x <- 1           #es ejemplo hay que cambiarlo antes de iniciar
+N <- 100
+K <- 15
+n <- 10
+x <- 1   #es ejemplo hay que cambiarlo antes de iniciar
 
 
 # P(X = x): probabilidad puntual
