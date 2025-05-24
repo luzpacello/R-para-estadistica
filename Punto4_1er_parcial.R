@@ -1,6 +1,9 @@
 #Parámetro: p = probabilidad de éxito en cada ensayo.
 #Variable aleatoria: X = número de ensayos hasta obtener el primer éxito.
 
+n <- 5        #es ejemplo hay que cambiarlo antes de iniciar
+p <- 0.5      #es ejemplo hay que cambiarlo antes de iniciar
+
 # Probabilidad puntual P(X = x)
 geo_puntual <- function(p, x){
   if (is.null(x)) stop("Debe ingresar el número de ensayo x.")
