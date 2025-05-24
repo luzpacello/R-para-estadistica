@@ -3,9 +3,9 @@
 #x = número de éxitos deseados
 
 
-n_ensayos <- 5  #es ejemplo hay que cambiarlo antes de iniciar
-p_exito <- 0.5  #es ejemplo hay que cambiarlo antes de iniciar
-x <- 2          #es ejemplo hay que cambiarlo antes de iniciar
+n <- 5        #es ejemplo hay que cambiarlo antes de iniciar
+p <- 0.5      #es ejemplo hay que cambiarlo antes de iniciar
+x <- 2        #es ejemplo hay que cambiarlo antes de iniciar
 
 
 # probabilidad puntual P(X = x)
@@ -29,3 +29,7 @@ varianza <- n * p * (1 - p)
 
 print(paste("Esperanza:", esperanza))
 print(paste("Varianza:", varianza))
+
+#Ejemplo de forma de uso
+#En consola se escribe "print(paste("P(X = 3):", bi_puntual(n, p, x)))"
+#paste solo concatena las cadenas
