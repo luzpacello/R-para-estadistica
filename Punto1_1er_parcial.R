@@ -203,3 +203,6 @@ tabla_frecuencias <- data.frame(
 )
 # Mostrar tabla
 print(tabla_frecuencias, row.names = FALSE)
+
+# la marca de clase es  ((lim inf del intervalo(xi)) * (lim sup del intervalo(xi))) /2
+# Para calcular la media es (marca de clase (mi) * frecuencia absoluta (fi)) / la suma de las fi(osea n)
