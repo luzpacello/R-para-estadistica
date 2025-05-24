@@ -1,3 +1,11 @@
+# UE = objeto o sujeto que pertenece a la muestra o poblacion
+# Variable = caracteristica de interes de cada UE
+# Poblacion = coleccion o conjunto de individuos, objetos o 
+# eventos cuyas propiedades se analizaran
+# Muestra = Subconjunto de una poblacion
+# Poblacion de undades = Es el conjunto de todas las unidades experimentales posibles que podrían ser observadas en un estudio.
+# Muestra de unidades = Un subconjunto de unidades experimentales
+
 #Primero definimos el directorio en el que etamos trabajando
 #Nota: Si trabajas con R estudio, le das click derecho al nombre del archivo
 #     le das a "Set Working Directory" para setear el directorio en el cual
