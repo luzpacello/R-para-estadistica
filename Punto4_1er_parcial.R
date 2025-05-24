@@ -2,10 +2,10 @@
 # la probabilidad de que el primer éxito ocurra en el intento x	
 # Ej: ¿Cuántas veces lanzo hasta que sale cara?
 # Parámetro: p = probabilidad de éxito en cada ensayo.
-# Variable aleatoria: X = número de ensayos hasta obtener el primer éxito.
+# Variable aleatoria: X = x = número de ensayos hasta obtener el primer éxito.
 
-n <- 5        #es ejemplo hay que cambiarlo antes de iniciar
-p <- 0.5      #es ejemplo hay que cambiarlo antes de iniciar
+x <- 5        #es ejemplo hay que cambiarlo antes de iniciar
+p <- 0.2
 
 # Probabilidad puntual P(X = x)
 geo_puntual <- function(p, x){
