@@ -143,7 +143,7 @@ curtosis <- round(kurtosis(datos) - 3 ,4)
 #Mesocúrtica: Es la distribución simétrica respecto de su media. curtosis = 0
 
 
-cv <- (media / desviacion) * 100
+cv <- (desviacion / media) * 100
 cat("coeficiente de variacion:", cv, "\n")
 #En caso de que la media sea muy próxima a cero no debe usarse ya que el denominador
 #es muy pequeño y puede dar un grado erróneo de la dispersión.
