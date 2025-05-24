@@ -69,3 +69,7 @@ prob_bayes <- function(P_B_dado_A, P_A, P_B) {
     if (P_B == 0) stop("P(B) no puede ser cero.")
         return((P_B_dado_A * P_A) / P_B)
 }
+
+#Ejemplo de forma de uso
+#En consola se escribe "print(paste("probabilidad de  P(no A)", prob_complemento(P_A)))"
+#paste solo concatena las cadenas
