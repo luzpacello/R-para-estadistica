@@ -1,3 +1,5 @@
+# Experiencia (o experimento): Es el proceso mediante el cual se obtiene una observación o medida. Se describe con un verbo (acción) sobre una unidad experimental.
+
 #A: el cliente tiene cuenta de ahorro como producto principal.
 #B: el cliente tiene tarjeta de crédito como producto principal.
 #AB: tiene paquete cuenta sueldo + tarjeta.
@@ -20,7 +22,7 @@ matriz <- matrix(
 )
 colnames(matriz) <- c("A", "B", "AB", "O") #columnas
 rownames(matriz) <- c("P1", "P2", "P3") #filas
-
+# Las columnas son mutuamente excluyentes
 # NOTA: ESTE CODIGO PUEDE SERVIR MAS COMO UN AYUDA MEMORIA
 
 #  calcular P(A∩B)
