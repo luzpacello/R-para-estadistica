@@ -1,10 +1,12 @@
-#n = número de ensayos
-#p = probabilidad de éxito en cada ensayo
-#x = número de éxitos deseados
+# Con reemplazo (o independientes) y se distingue con la probabilidad de obtener x éxitos en n ensayos	
+# Ej: Lanzar una moneda 10 veces
+# n = número de ensayos
+# p = probabilidad de éxito en cada ensayo
+# x = número de éxitos deseados
 
 
-n <- 5        #es ejemplo hay que cambiarlo antes de iniciar
-p <- 0.5      #es ejemplo hay que cambiarlo antes de iniciar
+n <- 8
+p <- 0.05
 x <- 2        #es ejemplo hay que cambiarlo antes de iniciar
 
 
