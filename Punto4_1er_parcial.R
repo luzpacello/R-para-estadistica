@@ -1,4 +1,4 @@
-# No hay reemplazo, es hasta primer éxito	
+# hay reemplazo, es hasta primer éxito	
 # la probabilidad de que el primer éxito ocurra en el intento x	
 # Ej: ¿Cuántas veces lanzo hasta que sale cara?
 # Parámetro: p = probabilidad de éxito en cada ensayo.
